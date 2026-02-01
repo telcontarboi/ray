@@ -511,7 +511,7 @@
                 
                 <div class="input-group">
                     <label for="supplementName">Supplement name</label>
-                    <input type="text" id="supplementName" placeholder="E.g., Vitamin D" list="supplementNameList">
+                    <input type="text" id="supplementName" placeholder="E.g., Vitamin D" list="supplementNameList" onchange="fillDosageFromSupplementName()" oninput="fillDosageFromSupplementName()">
                     <datalist id="supplementNameList"></datalist>
                 </div>
 
@@ -1591,6 +1591,35 @@
 
             saveData();
             renderMeals();
+        }
+
+        function getSupplementRecommendedTime(name) {
+            if (!name || typeof supplementDatabase === 'undefined') return null;
+            const trimmed = String(name).trim();
+            const validTimes = ['Morning', 'Afternoon', 'Evening', 'Before meals', 'During meals', 'After meals'];
+            for (const goal of Object.values(supplementDatabase)) {
+                if (!goal.supplements) continue;
+                for (const supp of goal.supplements) {
+                    if (supp.name && (supp.name === trimmed || supp.name.toLowerCase().includes(trimmed.toLowerCase()) || trimmed.toLowerCase().includes(supp.name.toLowerCase()))) {
+                        const t = (supp.time || '').trim();
+                        if (validTimes.includes(t)) return t;
+                        if (t && t.indexOf('/') !== -1) return validTimes.find(v => t.startsWith(v)) || 'Morning';
+                    }
+                }
+            }
+            return null;
+        }
+
+        function fillDosageFromSupplementName() {
+            const nameInput = document.getElementById('supplementName');
+            const dosageInput = document.getElementById('supplementDosage');
+            const timeSelect = document.getElementById('supplementTime');
+            const name = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
+            if (!name) return;
+            const info = getSupplementInfo(name);
+            if (info && info.dosage && dosageInput) dosageInput.value = info.dosage;
+            const recommendedTime = getSupplementRecommendedTime(name);
+            if (recommendedTime && timeSelect) timeSelect.value = recommendedTime;
         }
 
         function addSupplement() {
