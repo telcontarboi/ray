@@ -1202,7 +1202,7 @@
             "Alpha-Lipoic Acid": {
                 dosage: "300-600mg",
                 positive: ["Regenerates glutathione and vitamins C/E", "Chelates heavy metals (mercury, lead)", "Supports mitochondrial energy production", "Improves insulin sensitivity"],
-                negative: [], highDoseBenefits: ["600-1200mg: Enhanced blood sugar regulation", "600-1200mg: More pronounced effects on diabetic neuropathy"], depletionRisks: []
+                negative: [], highDoseBenefits: ["600-1200mg: Enhanced blood sugar regulation", "600-1200mg: More pronounced effects on diabetic neuropathy"], depletionRisks: ["Can bind minerals (iron, zinc); take separately or ensure adequate dietary intake"]
             },
             "Ashwagandha KSM-66": {
                 dosage: "300-600mg",
@@ -1232,7 +1232,7 @@
             "Calcium (if necessary)": {
                 dosage: "1000-1300mg",
                 positive: ["Essential for bone mineralization", "Supports muscle contraction and nerve signaling", "Required for blood clotting", "Best obtained from dairy (Peat recommends milk)"],
-                negative: [], highDoseBenefits: ["5-10g: Enhanced heavy metal detoxification"], depletionRisks: []
+                negative: [], highDoseBenefits: ["5-10g: Enhanced heavy metal detoxification"], depletionRisks: ["Can reduce absorption of zinc, iron, and magnesium if taken together; space doses"]
             },
             "Chlorella": {
                 dosage: "3-5g",
@@ -1292,7 +1292,7 @@
             "Iron (if deficient)": {
                 dosage: "18mg (women) / 8-11mg (men)",
                 positive: ["Corrects iron-deficiency anemia", "Essential for oxygen transport (hemoglobin)", "Supports cellular energy production", "Only supplement if blood tests confirm deficiency (Peat caution)"],
-                negative: [], highDoseBenefits: ["No high dosage benefits; excess may promote oxidative stress."], depletionRisks: []
+                negative: [], highDoseBenefits: ["No high dosage benefits; excess may promote oxidative stress."], depletionRisks: ["Can reduce zinc absorption; take separately from zinc and calcium"]
             },
             "L-Arginine": {
                 dosage: "3-6g",
@@ -1352,7 +1352,7 @@
             "NAC (N-Acetyl Cysteine)": {
                 dosage: "600-1800mg",
                 positive: ["Direct precursor to glutathione", "Powerful liver protectant", "Supports heavy metal detoxification", "Mucolytic - thins mucus in respiratory conditions"],
-                negative: [], highDoseBenefits: ["2000-3000mg: Enhanced glutathione support in liver and respiratory protocols", "2000-3000mg: Used in clinical detoxification support"], depletionRisks: []
+                negative: [], highDoseBenefits: ["2000-3000mg: Enhanced glutathione support in liver and respiratory protocols", "2000-3000mg: Used in clinical detoxification support"], depletionRisks: ["Can bind minerals (zinc, copper) at high doses; ensure adequate mineral intake"]
             },
             "Omega-3 (EPA/DHA)": {
                 dosage: "1000-2000mg",
@@ -1362,7 +1362,7 @@
             "Psyllium Fiber": {
                 dosage: "5-10g",
                 positive: ["Soluble fiber - feeds beneficial gut bacteria", "Supports healthy bowel movements", "May help lower cholesterol", "Promotes satiety"],
-                negative: [], highDoseBenefits: ["No high dosage benefits documented."], depletionRisks: []
+                negative: [], highDoseBenefits: ["No high dosage benefits documented."], depletionRisks: ["Can reduce mineral absorption; take away from supplements and meals by 1–2 hours"]
             },
             "Quercetin": {
                 dosage: "500-1000mg",
@@ -1437,7 +1437,7 @@
             "Vitamin E (mixed form)": {
                 dosage: "12-15mg (RDA) / 200-400 IU (supplements)",
                 positive: ["Fat-soluble antioxidant protecting cell membranes", "Protects against PUFA oxidation (Peat emphasis)", "Anti-inflammatory - reduces inflammatory prostaglandins", "Requirement increases with higher PUFA intake"],
-                negative: [], highDoseBenefits: ["400-800 IU: Higher doses used when PUFA intake is high"], depletionRisks: []
+                negative: [], highDoseBenefits: ["400-800 IU: Higher doses used when PUFA intake is high"], depletionRisks: ["High dose can increase vitamin K requirement; pair with K2"]
             },
             "Vitamin K2 (MK-4)": {
                 dosage: "100-200mcg",
@@ -1452,7 +1452,7 @@
             "Zinc": {
                 dosage: "8-14mg (RDA) / 15-30mg (supplements)",
                 positive: ["Essential for testosterone synthesis", "Supports immune function", "Cofactor for 300+ enzymes", "Supports wound healing and skin health"],
-                negative: [], highDoseBenefits: ["30-50mg (short-term): Used for immune support; balance with copper."], depletionRisks: []
+                negative: [], highDoseBenefits: ["30-50mg (short-term): Used for immune support; balance with copper."], depletionRisks: ["Depletes copper with long-term or high-dose use; consider copper or copper-rich foods"]
             }
         };
 
@@ -1704,6 +1704,15 @@
                                 </ul>
                             </div>
                         ` : '';
+                        const hasDepletion = info && info.depletionRisks && info.depletionRisks.length > 0;
+                        const depletionHtml = hasDepletion ? `
+                            <div style="margin-top: 12px; padding: 12px; background: #fff3e0; border-radius: 8px; border-left: 3px solid #e65100;">
+                                <div style="font-weight: 600; color: #bf360c; margin-bottom: 6px; font-size: 0.9em;">⚠️ Depletion risks</div>
+                                <ul style="margin: 0; padding-left: 20px; color: #333; font-size: 0.9em; line-height: 1.5;">
+                                    ${info.depletionRisks.map(r => `<li>${r}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : '';
                         html += `
                             <div class="supplement-card ${supp.completed ? 'completed' : ''}" style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border: 2px solid #667eea; border-radius: 12px; padding: 20px; position: relative;">
                                 <div style="display: flex; align-items: start; gap: 15px;">
@@ -1730,6 +1739,7 @@
                                             </div>
                                         ` : ''}
                                         ${highDoseHtml}
+                                        ${depletionHtml}
                                     </div>
                                     <button class="delete-supplement-btn" data-id="${supp.id}"
                                             title="Delete" 
