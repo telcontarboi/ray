@@ -1100,7 +1100,7 @@
                     { name: "Vitamin D3", dosage: "2000-4000 IU", time: "Morning", notes: "⚗️ FAT-SOLUBLE - Essential for calcium absorption and bone mineralization. Take with fats. Can accumulate, so monitor blood levels.", synergy: true, solubility: "lipo" },
                     { name: "Vitamin K2 (MK-4)", dosage: "100-200mcg", time: "Morning", notes: "⚗️ FAT-SOLUBLE - Directs calcium into bones and out of arteries. ESSENTIAL with vitamin D! Take together with fats.", synergy: true, solubility: "lipo" },
                     { name: "Magnesium", dosage: "300-400mg", time: "Evening", notes: "Essential cofactor for bone health and vitamin D activation.", synergy: true },
-                    { name: "Calcium (if necessary)", dosage: "500-1000mg", time: "During meals", notes: "Prefer dietary sources. If supplementing, divide into multiple doses and ALWAYS with D3+K2.", synergy: true }
+                    { name: "Calcium (Eggshell powder)", dosage: "500-1000mg", time: "During meals", notes: "Prefer dietary sources. If supplementing, divide into multiple doses and ALWAYS with D3+K2.", synergy: true }
                 ]
             },
             joints: {
@@ -1238,7 +1238,7 @@
                 positive: ["Supports healthy hair, skin, and nails", "Cofactor for carboxylase enzymes", "Essential for fat and carbohydrate metabolism", "Water-soluble - excess safely excreted"],
                 negative: [], highDoseBenefits: ["10,000-15,000mcg: More pronounced hair and nail growth", "10,000-15,000mcg: May help with brittle nail syndrome"], depletionRisks: []
             },
-            "Calcium (if necessary)": {
+            "Calcium (Eggshell powder)": {
                 dosage: "1000-1300mg",
                 positive: ["Essential for bone mineralization", "Supports muscle contraction and nerve signaling", "Required for blood clotting", "Best obtained from dairy (Peat recommends milk)"],
                 negative: [], highDoseBenefits: ["5-10g: Enhanced heavy metal detoxification"], depletionRisks: ["Can reduce absorption of zinc, iron, and magnesium if taken together; space doses"]
@@ -1462,6 +1462,56 @@
                 dosage: "8-14mg (RDA) / 15-30mg (supplements)",
                 positive: ["Essential for testosterone synthesis", "Supports immune function", "Cofactor for 300+ enzymes", "Supports wound healing and skin health"],
                 negative: [], highDoseBenefits: ["30-50mg (short-term): Used for immune support; balance with copper."], depletionRisks: ["Depletes copper with long-term or high-dose use; consider copper or copper-rich foods"]
+            },
+            "Aspirin (low-dose)": {
+                dosage: "81-325mg",
+                positive: ["Supports mitochondrial oxygen consumption", "Anti-inflammatory and cardioprotective", "Inhibits carbonic anhydrase supporting aerobic metabolism", "May support temperature and stress resilience"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; stay within recommended range."], depletionRisks: ["Can increase vitamin K requirement; ensure adequate K2 intake"]
+            },
+            "Copper": {
+                dosage: "0.9mg (RDA) / 1-2mg (supplements)",
+                positive: ["Essential for iron metabolism and red blood cell formation", "Cofactor for enzymes (energy, connective tissue)", "Supports nervous system and immune function", "Balance with zinc when supplementing zinc"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; excess can be harmful."], depletionRisks: []
+            },
+            "DHEA": {
+                dosage: "5-25mg",
+                positive: ["Precursor to testosterone, estrogen, and other hormones", "Supports adrenal function and stress resilience", "May support mood and energy in aging", "Often declines with age"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; use under guidance."], depletionRisks: []
+            },
+            "Gelatin": {
+                dosage: "10-20g",
+                positive: ["Rich in glycine and proline; supports collagen and connective tissue", "Balances methionine from muscle meat", "Supports gut lining and digestion", "Cooked form of collagen; use in foods or drinks"],
+                negative: [], highDoseBenefits: ["20-30g: Enhanced glycine load for sleep and recovery"], depletionRisks: []
+            },
+            "Niacinamide (Vitamin B3)": {
+                dosage: "100-500mg",
+                positive: ["No-flush form of B3; supports NAD+ and mitochondrial energy", "Anti-excitatory; helps restrain excessive free fatty acid release", "Protects against stress and hypoglycemia effects", "Supports glucose oxidation and protein metabolism"],
+                negative: [], highDoseBenefits: ["500mg-1g: Used in some metabolic and liver support protocols"], depletionRisks: []
+            },
+            "Potassium": {
+                dosage: "2600-3400mg (diet + supplement)",
+                positive: ["Essential for fluid balance and nerve/muscle function", "Supports stress resilience and sugar utilization", "Often low in modern diets; dietary sources preferred (fruit, potato, coconut water)"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; balance with sodium and magnesium."], depletionRisks: []
+            },
+            "Pregnenolone": {
+                dosage: "5-30mg",
+                positive: ["Precursor to progesterone, DHEA, and other steroid hormones", "Supports adrenal and brain hormone production", "May support memory and stress adaptation", "Often declines with age"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; use under guidance."], depletionRisks: []
+            },
+            "Progesterone": {
+                dosage: "Varies by form (topical/oral); follow product guidance",
+                positive: ["Supports stress resistance and adaptation", "Anti-anxiety; supports sleep and mood", "Supports bone and cardiovascular health", "Often used in vitamin E base for absorption"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; use under guidance."], depletionRisks: []
+            },
+            "Taurine": {
+                dosage: "500-2000mg",
+                positive: ["Amino acid supporting bile acid conjugation and liver function", "Supports heart rhythm and electrolyte balance", "Antioxidant; supports brain and eye health", "Not abundant in muscle meat; supplement or from seafood"],
+                negative: [], highDoseBenefits: ["2-3g: Used in some cardiovascular and metabolic protocols"], depletionRisks: []
+            },
+            "Vitamin A (Retinol)": {
+                dosage: "3000-5000 IU (RDA) / 5000-10000 IU (supplements)",
+                positive: ["Essential for vision, skin, and immune function", "Supports steroid hormone conversion with thyroid and cholesterol", "Anti-estrogenic; supports protective hormone balance", "Best from food (liver, egg, dairy) or retinol form"],
+                negative: [], highDoseBenefits: ["No high dosage benefits; avoid excess; prefer food sources."], depletionRisks: []
             }
         };
 
@@ -2342,6 +2392,7 @@
             Object.values(supplementDatabase).forEach(category => {
                 category.supplements.forEach(s => names.add(s.name));
             });
+            Object.keys(supplementInfo).forEach(name => names.add(name));
             const datalist = document.getElementById('supplementNameList');
             datalist.innerHTML = [...names].sort().map(name => `<option value="${name}">`).join('');
         }
