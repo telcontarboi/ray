@@ -540,6 +540,15 @@
                 <button class="btn btn-primary" onclick="addSupplement()">➕ Add Supplement</button>
 
                 <div class="item-list" id="supplementsList"></div>
+
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #667eea20;">
+                    <h3 style="color: #667eea; margin-bottom: 12px;">📋 All supplements reference</h3>
+                    <p style="color: #666; font-size: 0.95em; margin-bottom: 16px;">Complete list of supplements in the app with recommended dosage.</p>
+                    <input type="text" id="supplementReferenceSearch" placeholder="Search supplements..." 
+                           oninput="renderAllSupplementsList()" 
+                           style="width: 100%; max-width: 320px; padding: 12px 16px; border: 2px solid #667eea; border-radius: 10px; font-size: 1em; margin-bottom: 20px;">
+                    <div id="allSupplementsList" style="display: grid; gap: 12px; max-height: 400px; overflow-y: auto; padding-right: 8px;"></div>
+                </div>
             </div>
 
             <!-- Tab Attività -->
@@ -1768,6 +1777,24 @@
             });
         }
 
+        function renderAllSupplementsList() {
+            const container = document.getElementById('allSupplementsList');
+            const searchEl = document.getElementById('supplementReferenceSearch');
+            const query = (searchEl && searchEl.value ? searchEl.value.trim().toLowerCase() : '') || '';
+            const names = Object.keys(supplementInfo).sort((a, b) => a.localeCompare(b));
+            const filtered = query ? names.filter(n => n.toLowerCase().includes(query)) : names;
+            container.innerHTML = filtered.map(name => {
+                const info = supplementInfo[name];
+                const dosage = (info && info.dosage) ? info.dosage : '—';
+                return `
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: white; border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                        <span style="font-weight: 600; color: #333;">${name}</span>
+                        <span style="color: #667eea; font-size: 0.9em; font-weight: 500;">${dosage}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function getTimeIcon(time) {
             const icons = {
                 'Morning': '🌅',
@@ -2323,6 +2350,7 @@
         loadData();
         updateStats();
         populateSupplementNames();
+        renderAllSupplementsList();
 
     </script>
 </body>
